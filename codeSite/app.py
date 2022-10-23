@@ -1,12 +1,10 @@
 import streamlit as st
-from PIL import Image
 
 
 st.set_page_config(page_title="Honeytree Code Search",
                    page_icon=":wrench:", layout='wide')
 col1, col2 = st.columns([2, 1])
-image = Image.open(
-    "C:\\Users\\Honey\\Downloads\\honeytree logos\\Png\\Honeytreesolutions Logo_Dark BCGD-Mark.png")
+
 with col1:
     st.title(body='Honeytree Appliance Repair')
     st.header('Error Code Search')
@@ -14,7 +12,7 @@ with col1:
     st.write('For now this is only good for **Whirlpool Washers**.')
     st.write('Its still a work in progress but you get the basics.')
 with col2:
-    st.image(image)
+    st.header('pic will be here')
 st.write('---')
 
 
