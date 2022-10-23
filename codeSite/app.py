@@ -1,5 +1,5 @@
 import streamlit as st
-
+from PIL import Image
 
 st.set_page_config(page_title="Honeytree Code Search",
                    page_icon=":wrench:", layout='wide')
@@ -12,7 +12,7 @@ with col1:
     st.write('For now this is only good for **Whirlpool Washers**.')
     st.write('Its still a work in progress but you get the basics.')
 with col2:
-    st.image("codeSite/Honeytreesolutions Logo_Dark BCGD-Mark.png")
+    st.image("C:\\Users\\Honey\\Downloads\\honeytree logos\\Png\\Honeytreesolutions Logo_Dark BCGD-Mark.png")
 st.write('---')
 
 
@@ -93,13 +93,31 @@ front_load = {
     'F9E1':
     'LONG DRAIN',
 }
+lgError = {
+    'IE': 'WATER INLET ERROR',
+    'UE': 'UNBALANCE ERROR',
+    'OE': 'DRAIN ERROR',
+    'FE': 'OVERFLOW ERROR',
+    'PE': 'PRESSURE SENSOR ERROR',
+    'DE1': 'DOOR OPEN ERROR',
+    'DE2': 'DOOR OPEN ERROR',
+    'TE': 'HEATING ERROR',
+    'LE': 'LOCKED MOTOR ERROR',
+    'EE': 'EEPROM ERROR',
+    'PF': 'POWER FAILURE',
+    'SUD': 'SUDS ERROR'
+}
 
+
+choice = st.selectbox(
+    'Select Brand', ('LG', 'Whirlpool', 'More Coming Soon'))
 
 tab1, tab2, tab3, tab4 = st.tabs(
     ['Front Load Washers', 'Top Load Washers', 'Refrigerator', 'Stoves'])
 
 with tab1:
-    with st.container():
+
+    if choice == 'Whirlpool':
         c = st.text_input('Enter Front Load Code')
         submit = st.button('Search')
         if submit:
@@ -107,15 +125,31 @@ with tab1:
                 st.write(front_load[c.upper()])
             else:
                 st.write('Code not found.')
+    if choice == 'LG':
+        e = st.text_input('Enter Front Load Code')
+        submit = st.button('Search Code')
+        if submit:
+            if e.upper() in lgError:
+                st.write(lgError[e.upper()])
+            else:
+                st.write('Code not found.')
+
 
 with tab2:
-    with st.container():
-
+    if choice == 'Whirlpool':
         d = st.text_input('Enter Top Load Code',)
         submit = st.button('Search Codes')
         if submit:
             if d.upper() in topLoad:
                 st.write(topLoad[d.upper()])
+            else:
+                st.write('Code not found.')
+    if choice == 'LG':
+        f = st.text_input('Enter Top Load Code')
+        submit = st.button('Search')
+        if submit:
+            if f.upper() in lgError:
+                st.write(lgError[f.upper()])
             else:
                 st.write('Code not found.')
 
