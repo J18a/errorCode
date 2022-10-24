@@ -7,11 +7,11 @@ st.set_page_config(page_title="Honeytree Code Search",
 col1, col2 = st.columns([2, 1])
 
 with col1:
-    st.title(body='Honeytree Appliance Repair')
-    st.header('Error Code Search')
-
-    st.write('Ive added some sealed system diagnosis tool')
+    st.title(body='Honeytree Appliance Repair Diagnostic Site',)
+    st.header('Recently Updated')
+    st.write('Ive added some sealed system')
     st.write('Its still a work in progress but you get the basics.')
+    
 with col2: 
   st.image('codeSite/Honeytreesolutions Logo_Dark BCGD-Mark.png')
 st.write('---')
