@@ -1,3 +1,4 @@
+
 import streamlit as st
 from PIL import Image
 
@@ -9,10 +10,10 @@ with col1:
     st.title(body='Honeytree Appliance Repair')
     st.header('Error Code Search')
 
-    st.write('For now this is only good for **Washers**.')
+    st.write('Ive added some sealed system diagnosis tool')
     st.write('Its still a work in progress but you get the basics.')
 with col2:
-    st.image('codeSite/Honeytreesolutions Logo_Dark BCGD-Mark.png')
+    st.image("C:\\Users\\Honey\\Downloads\\honeytree logos\\Png\\Honeytreesolutions Logo_Dark BCGD-Mark.png")
 st.write('---')
 
 
@@ -107,54 +108,88 @@ lgError = {
     'PF': 'POWER FAILURE',
     'SUD': 'SUDS ERROR'
 }
+lgDw = {
+    'AE': 'LEAKAGE ERROR',
+    'CL': 'CHILD LOCK',
+    'CD': 'COOL DOWN, USUALLY MEANS THE DISHWAHER IS DONE',
+    'FE': 'FILL ERROR',
+    'HE': 'HEAT ERROR',
+    'IE': 'INLET ERROR',
+    'LE': 'LOCK ERROR',
+    'OE': 'OUTLET ERROR',
+    'PF': 'POWER FAILURE',
+    'DE': 'DOOR ERROR',
+    'TE': 'THERMISTOR ERROR'
+
+}
 
 
 choice = st.selectbox(
-    'Select Brand', ('LG', 'Whirlpool', 'More Coming Soon'))
+    'Please Brand or Issue', ('LG', 'Whirlpool', 'Sealed System Issue', 'More Coming Soon'))
+if choice == 'More Coming Soon':
+    st.header('Stay Tuned')
+    st.stop()
 
-tab1, tab2, tab3, tab4 = st.tabs(
-    ['Front Load Washers', 'Top Load Washers', 'Refrigerator', 'Stoves'])
+if choice == 'Sealed System Issue':
+    with st.container():
+        lowSide = st.number_input('Enter Low side pressure', step=1)
+        highSide = st.number_input('Enter High side pressure', step=1)
+        submit = st.button('Submit Pressures')
+        if submit:
+            if highSide < 90 and lowSide < 0:
+                st.write('You have a **High Side** leak')
+            if -2 <= lowSide <= 5 and 90 <= highSide <= 120:
+                st.write('These are only normal **IF** the evap is cold')
+            if highSide > 125 and lowSide < 0:
+                st.write('You have a **low side** leak')
+            else:
+                st.write('Call Tech Line')
 
-with tab1:
+
+flWasher, tlWasher, fridge, stoves, dw = st.tabs(
+    ['Front Load Washers', 'Top Load Washers', 'Refrigerator', 'Stoves', 'Dishwashers'])
+
+
+with flWasher:
 
     if choice == 'Whirlpool':
         c = st.text_input('Enter Front Load Code')
-        submit = st.button('Search')
-        if submit:
-            if c.upper() in front_load:
-                st.write(front_load[c.upper()])
-            else:
-                st.write('Code not found.')
+
+        if c.upper() in front_load:
+            st.write(front_load[c.upper()])
+        else:
+            st.write('Code not found.')
     if choice == 'LG':
         e = st.text_input('Enter Front Load Code')
-        submit = st.button('Search Code')
-        if submit:
-            if e.upper() in lgError:
-                st.write(lgError[e.upper()])
-            else:
-                st.write('Code not found.')
+        if e.upper() in lgError:
+            st.write(lgError[e.upper()])
+        else:
+            st.write('Code not found.')
 
 
-with tab2:
+with tlWasher:
     if choice == 'Whirlpool':
         d = st.text_input('Enter Top Load Code',)
-        submit = st.button('Search Codes')
-        if submit:
-            if d.upper() in topLoad:
-                st.write(topLoad[d.upper()])
-            else:
-                st.write('Code not found.')
+        if d.upper() in topLoad:
+            st.write(topLoad[d.upper()])
+        else:
+            st.write('Code not found.')
     if choice == 'LG':
         f = st.text_input('Enter Top Load Code')
-        submit = st.button('Search')
-        if submit:
-            if f.upper() in lgError:
-                st.write(lgError[f.upper()])
-            else:
-                st.write('Code not found.')
+        if f.upper() in lgError:
+            st.write(lgError[f.upper()])
+        else:
+            st.write('Code not found.')
 
-with tab3:
+with fridge:
+    st.header('Coming Soon!!')
+with stoves:
     st.header('Coming Soon!!')
 
-with tab4:
-    st.header('Coming Soon!!')
+with dw:
+    if choice == 'LG':
+        g = st.text_input('Enter DW Code')
+        if g.upper() in lgDw:
+            st.write(lgDw[g.upper()])
+        else:
+            st.write('Code not found.')
