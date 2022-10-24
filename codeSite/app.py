@@ -12,8 +12,8 @@ with col1:
 
     st.write('Ive added some sealed system diagnosis tool')
     st.write('Its still a work in progress but you get the basics.')
-with col2:
-    st.image("C:\\Users\\Honey\\Downloads\\honeytree logos\\Png\\Honeytreesolutions Logo_Dark BCGD-Mark.png")
+with col2: 
+  st.image('codeSite/Honeytreesolutions Logo_Dark BCGD-Mark.png')
 st.write('---')
 
 
