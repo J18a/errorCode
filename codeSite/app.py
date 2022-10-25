@@ -13,7 +13,7 @@ with col1:
         st.write('**_10/24/22_** - Ive organized it out a little ')
 
 with col2:
-    st.image("C:\\Users\\Honey\\Downloads\\honeytree logos\\Png\\Honeytreesolutions Logo_Dark BCGD-Mark.png")
+    st.image('codeSite/Honeytreesolutions Logo_Dark BCGD-Mark.png')
 st.write('---')
 
 
