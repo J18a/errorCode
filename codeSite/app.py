@@ -8,12 +8,12 @@ col1, col2 = st.columns([2, 1])
 
 with col1:
     st.title(body='Honeytree Appliance Repair Diagnostic Site',)
-    st.header('Recently Updated')
-    st.write('Ive added some sealed system')
-    st.write('Its still a work in progress but you get the basics.')
-    
-with col2: 
-  st.image('codeSite/Honeytreesolutions Logo_Dark BCGD-Mark.png')
+    with st.container():
+        st.header('**Recently Updated**')
+        st.write('**_10/24/22_** - Ive organized it out a little ')
+
+with col2:
+    st.image("C:\\Users\\Honey\\Downloads\\honeytree logos\\Png\\Honeytreesolutions Logo_Dark BCGD-Mark.png")
 st.write('---')
 
 
@@ -122,12 +122,43 @@ lgDw = {
     'TE': 'THERMISTOR ERROR'
 
 }
+kadw = {
+    '1-1': 'PILOT STUCK ON',
+    '1-2': 'CONTROL SOFTWARE ISSUE',
+    '2-2': 'NO RESPONSE FROM UI',
+    '3-1': 'THERMISTOR OPEN',
+    '3-2': 'THERMISTOR SHORTED',
+    '3-3': 'FAILED CALIBRATION',
+    '4-3': 'MOTOR NOT RUNNING',
+    '5-1': 'DOOR STUCK OPEN',
+    '5-2': 'DOOR STUCK CLOSED',
+    '6-1': 'LOW/NO WATER',
+    '6-2': 'FILL VALVE PROBLEM',
+    '6-3': 'SUDS/AIR IN PUMP',
+    '6-4': 'FLOAT SWITCH OPEN',
+    '7-1': 'NO HEAT',
+    '7-2': 'HEATER STUCK ON',
+    '8-2': 'DRAIN MOTOR PROBLEM',
+    '8-3': 'DRAIN STUCK ON',
+    '9-1': 'CANT FIND POSITION',
+    '9-2': 'STUCK ON',
+    '9-3': 'DISC MISSING',
+    '10-1': 'DISPENSER ELECTRICAL PROBLEM',
+    '10-3': 'DRYING FAN ERROR'
 
 
-choice = st.selectbox(
-    'Please Brand or Issue', ('LG', 'Whirlpool', 'Sealed System Issue', 'More Coming Soon'))
+
+
+
+}
+
+choice = st.radio(
+    'Please Select Brand or Issue', ('', 'LG', 'Whirlpool', 'Sealed System Issue', 'More Coming Soon'),)
+if choice == '':
+    st.stop()
+
 if choice == 'More Coming Soon':
-    st.header('Stay Tuned')
+    st.header('Stay Tuned!!')
     st.stop()
 
 if choice == 'Sealed System Issue':
@@ -136,7 +167,7 @@ if choice == 'Sealed System Issue':
         highSide = st.number_input('Enter High side pressure', step=1)
         submit = st.button('Submit Pressures')
         if submit:
-            if highSide < 90 and lowSide < 0:
+            if highSide < 90 and lowSide < -2:
                 st.write('You have a **High Side** leak')
             if -2 <= lowSide <= 5 and 90 <= highSide <= 120:
                 st.write('These are only normal **IF** the evap is cold')
@@ -144,52 +175,57 @@ if choice == 'Sealed System Issue':
                 st.write('You have a **low side** leak')
             else:
                 st.write('Call Tech Line')
+        st.stop()
 
+if choice == 'LG':
+    with st.container():
+        dw, washer = st.tabs(['Dishwasher', 'Washer'])
+        with dw:
+            a = st.text_input('Enter Dishwasher Code')
+            button = st.button('Search Dishwasher Code')
+            if button == True:
+                if a.upper() in lgDw:
+                    st.write(lgDw[a.upper()])
+                else:
+                    st.write('Code not found.')
+        with washer:
+            b = st.text_input('Enter Front Load Code')
+            button = st.button('Search Washer Code')
+            if button == True:
+                if b.upper() in lgError:
+                    st.write(lgError[b.upper()])
+                else:
+                    st.write('Code not found.')
 
-flWasher, tlWasher, fridge, stoves, dw = st.tabs(
-    ['Front Load Washers', 'Top Load Washers', 'Refrigerator', 'Stoves', 'Dishwashers'])
+if choice == 'Whirlpool':
+    with st.container():
+        dw, tWasher, fWasher = st.tabs(
+            ['Dishwasher', 'Top Load Washer', 'Front Load Washer'])
 
+        with dw:
+            c = st.text_input('Enter Dishwasher Code')
+            st.info('Enter code like this 4-3', icon="ℹ️")
+            button = st.button('Search Dishwasher Code')
+            if button == True:
+                if c.upper() in kadw:
+                    st.write(kadw[c.upper()])
+                else:
+                    st.write('Code not found.')
 
-with flWasher:
+        with tWasher:
+            d = st.text_input('Enter Top Load Code',)
+            button = st.button('Search Washer Code')
+            if button == True:
+                if d.upper() in topLoad:
+                    st.write(topLoad[d.upper()])
+                else:
+                    st.write('Code not found.')
 
-    if choice == 'Whirlpool':
-        c = st.text_input('Enter Front Load Code')
-
-        if c.upper() in front_load:
-            st.write(front_load[c.upper()])
-        else:
-            st.write('Code not found.')
-    if choice == 'LG':
-        e = st.text_input('Enter Front Load Code')
-        if e.upper() in lgError:
-            st.write(lgError[e.upper()])
-        else:
-            st.write('Code not found.')
-
-
-with tlWasher:
-    if choice == 'Whirlpool':
-        d = st.text_input('Enter Top Load Code',)
-        if d.upper() in topLoad:
-            st.write(topLoad[d.upper()])
-        else:
-            st.write('Code not found.')
-    if choice == 'LG':
-        f = st.text_input('Enter Top Load Code')
-        if f.upper() in lgError:
-            st.write(lgError[f.upper()])
-        else:
-            st.write('Code not found.')
-
-with fridge:
-    st.header('Coming Soon!!')
-with stoves:
-    st.header('Coming Soon!!')
-
-with dw:
-    if choice == 'LG':
-        g = st.text_input('Enter DW Code')
-        if g.upper() in lgDw:
-            st.write(lgDw[g.upper()])
-        else:
-            st.write('Code not found.')
+        with fWasher:
+            e = st.text_input('Enter Front Load Code')
+            button = st.button('Search Front Load Washer Code')
+            if button == True:
+                if e.upper() in front_load:
+                    st.write(front_load[e.upper()])
+                else:
+                    st.write('Code not found.')
